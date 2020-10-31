@@ -14,8 +14,10 @@ namespace ChatTestClient
 
         private static async Task Run()
         {
+            var hubHostname = Environment.GetEnvironmentVariable("HUB_HOSTNAME");
+            hubHostname = string.IsNullOrEmpty(hubHostname) ? "localhost" : hubHostname;
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5001/chathub")
+                .WithUrl($"http://{hubHostname}:5001/chathub")
                 .WithAutomaticReconnect()
                 .Build();
 
